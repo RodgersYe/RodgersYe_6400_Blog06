@@ -6,31 +6,67 @@ This repository contains the reproducible R and Python/SQL workflow for estimati
 
 ## Repository structure
 
+The tree below shows the **local project structure after downloading the source data and running all four scripts**. Files marked *not uploaded* are intentionally absent from GitHub; the filenames are included to help researchers verify their local setup.
+
 ```text
 RodgersYe_6400_Blog06/
+├── figures/
+│   ├── ige_single_vs_multiyear.png
+│   ├── ige_single_only.png
+│   └── ige_multiyear_only.png
+├── data_raw/
+│   ├── .gitkeep                       # Preserves the folder on GitHub
+│   ├── PID23.txt                      # Downloaded locally; not uploaded
+│   ├── PID23.do                       # Downloaded locally; not uploaded
+│   ├── IND2023ER.txt                  # Downloaded locally; not uploaded
+│   ├── IND2023ER.do                   # Downloaded locally; not uploaded
+│   ├── FAM2023ER.txt                  # Downloaded locally; not uploaded
+│   ├── FAM2023ER.do                   # Downloaded locally; not uploaded
+│   ├── FAM2021ER.txt                  # Downloaded locally; not uploaded
+│   ├── FAM2021ER.do                   # Downloaded locally; not uploaded
+│   ├── FAM2019ER.txt                  # Downloaded locally; not uploaded
+│   ├── FAM2019ER.do                   # Downloaded locally; not uploaded
+│   ├── FAM2017ER.txt                  # Downloaded locally; not uploaded
+│   ├── FAM2017ER.do                   # Downloaded locally; not uploaded
+│   ├── FAM2015ER.txt                  # Downloaded locally; not uploaded
+│   ├── FAM2015ER.do                   # Downloaded locally; not uploaded
+│   ├── FAM2013ER.txt                  # Downloaded locally; not uploaded
+│   ├── FAM2013ER.do                   # Downloaded locally; not uploaded
+│   ├── FAM2011ER.txt                  # Downloaded locally; not uploaded
+│   ├── FAM2011ER.do                   # Downloaded locally; not uploaded
+│   ├── FAM2009ER.txt                  # Downloaded locally; not uploaded
+│   ├── FAM2009ER.do                   # Downloaded locally; not uploaded
+│   ├── FAM2007ER.txt                  # Downloaded locally; not uploaded
+│   ├── FAM2007ER.do                   # Downloaded locally; not uploaded
+│   ├── FAM2005ER.txt                  # Downloaded locally; not uploaded
+│   ├── FAM2005ER.do                   # Downloaded locally; not uploaded
+│   ├── FAM2003ER.txt                  # Downloaded locally; not uploaded
+│   ├── FAM2003ER.do                   # Downloaded locally; not uploaded
+│   ├── FAM2001ER.txt                  # Downloaded locally; not uploaded
+│   ├── FAM2001ER.do                   # Downloaded locally; not uploaded
+│   ├── FAM1999ER.txt                  # Downloaded locally; not uploaded
+│   └── FAM1999ER.do                   # Downloaded locally; not uploaded
+├── data_processed/
+│   ├── ige_singleyear_results.csv
+│   ├── ige_single_year.csv           # Generated locally; not uploaded
+│   ├── ige_multiyear_results.csv
+│   ├── ige_multiyear_difference.csv
+│   └── ige_multi_year.csv            # Generated locally; not uploaded
+├── code/
+│   ├── 04_multiyear_analyze_ige.R
+│   ├── 03_multiyear_prepare_data.R
+│   ├── 02_singleyear_analyze_ige.R
+│   ├── 01_singleyear_prepare_data.R
+│   └── .Rhistory                     # Generated locally; not uploaded (optional)
+├── .Rproj.user/                      # Generated locally; not uploaded (optional)
+├── .git/                             # Local Git metadata; not uploaded
 ├── RodgersYe_6400_Blog06.Rproj
 ├── README.md
-├── .gitignore
-├── code/
-│   ├── 01_singleyear_prepare_data.R
-│   ├── 02_singleyear_analyze_ige.R
-│   ├── 03_multiyear_prepare_data.R
-│   └── 04_multiyear_analyze_ige.R
-├── data_raw/
-│   └── .gitkeep                       # Keeps the folder on GitHub; no PSID data
-├── data_processed/
-│   ├── ige_single_year.csv           # Generated locally; not uploaded
-│   ├── ige_singleyear_results.csv
-│   ├── ige_multi_year.csv            # Generated locally; not uploaded
-│   ├── ige_multiyear_results.csv
-│   └── ige_multiyear_difference.csv
-└── figures/
-    ├── ige_single_only.png
-    ├── ige_multiyear_only.png
-    └── ige_single_vs_multiyear.png
+├── .Rhistory                         # Generated locally; not uploaded (optional)
+└── .gitignore
 ```
 
-The two row-level files shown under `data_processed/` are **outputs created during reproduction**, not files available in the GitHub checkout. The other CSVs and figures are aggregate results.
+**File availability:** Only `.gitkeep` is committed inside `data_raw/`. The 30 PSID `.txt`/`.do` files must be downloaded into that folder locally. The two row-level CSVs are produced by scripts `01` and `03`, rather than distributed through GitHub. `.Rhistory` and `.Rproj.user/` are optional local RStudio files, and `.git/` is managed by Git when the repository is cloned or initialized.
 
 ## 1. Obtain the source data
 
@@ -88,16 +124,5 @@ Running the preparation scripts generates the two omitted row-level CSVs locally
 - **`data_raw/`** contains no PSID data in the GitHub repository. Its `.gitkeep` file preserves the empty directory structure; users must populate it locally after obtaining access to PSID.
 - **`data_processed/ige_single_year.csv` and `data_processed/ige_multi_year.csv`** contain derived, row-level PSID observations and must not be uploaded. Both are reproducible with scripts `01` and `03` after the source data have been obtained.
 - The three aggregate summary CSVs and three figures are intended as shareable research outputs. Review them before publishing to ensure compliance with PSID requirements.
-
-Before pushing to GitHub, make sure `.gitignore` includes at least:
-
-```gitignore
-data_raw/*
-!data_raw/.gitkeep
-data_processed/ige_single_year.csv
-data_processed/ige_multi_year.csv
-```
-
-`.gitignore` does not remove files already tracked by Git; check tracked files before committing or pushing.
 
 PSID's [Conditions of Use](https://simba.isr.umich.edu/U/CondUse.aspx) prohibit redistributing PSID public-use microdata or user-created data extracts to third parties and prohibit using AI/LLM tools in conjunction with PSID data. Each researcher who accesses the data must register and accept the terms individually. Follow PSID's required citation instructions, including the year the data were downloaded, when reporting the research.
